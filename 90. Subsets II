@@ -1,0 +1,26 @@
+class Solution
+{
+    public:
+        vector<vector < int>> subsets(vector<int> &nums)
+        {
+            int n = nums.size();
+            int i = 0;
+            vector<vector < int>> ans;
+            vector<int> ds;
+            f1(i, n, ans, ds,nums);
+            return ans;
+        }
+    void f1(int i, int n, vector<vector < int>> &ans, vector< int > &ds,vector<int> &nums)
+    {
+        if(i==n){
+          ans.push_back(ds);  
+            return ;
+        }
+         ds.push_back(nums[i]);
+        f1(i+1, n, ans, ds,nums);
+        ds.pop_back();
+         while (i + 1 < n && nums[i] == nums[i + 1])
+            i++;
+         f1(i + 1, n, ans, ds,nums);
+    }
+};
