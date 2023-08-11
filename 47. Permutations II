@@ -1,0 +1,35 @@
+class Solution
+{
+    public:
+         unordered_set<int> hashmap;
+
+    vector<vector < int>> permuteUnique(vector<int> &nums)
+    {
+        int n = nums.size();
+        vector<int> ds;
+        vector<vector < int>> ans;
+        sort(nums.begin(), nums.end());
+        f(n, ds, ans, nums);
+        return ans;
+    }
+
+    void f(int n, vector<int> &ds, vector<vector< int >> &ans, vector< int > &nums)
+    {
+        if (ds.size() == n)
+        {
+            ans.push_back(ds);
+            return;
+        }
+      // unordered_set<int> hashmap;
+        for (int i = 0; i < n; i++)
+        {
+          if (hashmap.find(i) != hashmap.end()||(i>=1&&nums[i]==nums[i-1]&&hashmap.find(i-1)==hashmap.end()))
+                continue;
+            ds.push_back(nums[i]);
+            hashmap.insert(i);
+            f(n, ds, ans, nums);
+            ds.pop_back();
+            hashmap.erase(i);
+        }
+    }
+};
