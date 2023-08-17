@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+        int climbStairs(int n)
+        {
+            vector<int>dp(n+1,-1);
+            int i = 0;
+            int ans = f(i, n,dp);
+            return ans;
+        }
+    int f(int i, int n,vector<int>&dp)
+    {
+        if(i==n)
+            return 1;
+        if(i>n)
+            return 0;
+        if(dp[i]!=-1)
+            return dp[i];
+        int jump1 = f(i + 1, n,dp);
+        int jump2 = f(i + 2, n,dp);
+        dp[i]=jump1+jump2;
+        return dp[i];
+    }
+};
