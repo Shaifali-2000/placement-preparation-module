@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+        int minCostClimbingStairs(vector<int> &cost)
+        {
+
+            int n = cost.size();
+            vector<int> dp(n + 1, -1);
+            int ans = min(f(0, n, cost, dp), f(1, n, cost, dp));
+            return ans;
+        }
+    int f(int i, int n, vector<int> &cost, vector<int> &dp)
+    {
+        if (i == n)
+            return 0;
+        if (i > n)
+            return 1e9;
+        if (dp[i] != -1)
+            return dp[i];
+        int minimum_cost = cost[i] + min(f(i + 1, n, cost, dp), f(i + 2, n, cost, dp));
+        dp[i] = minimum_cost;
+        return dp[i];
+    }
+};
